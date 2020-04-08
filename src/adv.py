@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -39,6 +39,32 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+
+player = room["outside"]
+print(player.name)
+
+class Loop1: 
+    def __init__(self, input): 
+        self.input = input
+
+    def the_loop(self):
+        name = input('Enter a name  : ')
+        for i in self.input: 
+            print(self.input[i].name)
+            print(self.input[i].description)
+            input1 = input("Enter either n w s e:")
+            if input1 == 'n': 
+                mapper = Room(n_to=True)
+            elif input1 == 'w': 
+                mapper = Room(w_to=True)
+            elif input1 == 's': 
+                mapper = Room(s_to=True)
+            elif input1 == 'e': 
+                mapper = Room(e_to=True)
+            output = Player(name, self.input[i])
+
+outer_loop = Loop1(room)
+outer_loop.the_loop()
 # Write a loop that:
 #
 # * Prints the current room name
