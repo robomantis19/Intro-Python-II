@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from monster import Monster
 # Declare all the rooms
 
 room = {
@@ -36,14 +37,32 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
-
+monster = Monster()
 player = Player('tj', room['outside'])
+count = 0 
 while True:
-    # print(room[i].name)
+    count += 1
     inputs = input('input direction: n, s, e, w: ')
     
     print(player.move(inputs))
-    
+    print(player.take_damage('2'))
+    if count == 2: 
+        print("oh no you've encountered a goblin, time to fight")
+        gobblin = Monster()
+        print(gobblin)
+        loop = True
+        while loop == True: 
+            inputs = input('swipe sword enter r, magic enter f:')
+            if inputs == 'r': 
+                gobblin.take_damage('10')
+                print(gobblin)
+            elif inputs == 'f': 
+                print('magic attack value of: ',player.attack)
+                gobblin.take_damage(player.attack)
+                print(gobblin)
+            if gobblin.health == 0 : 
+                loop = False
+
 
 
 
