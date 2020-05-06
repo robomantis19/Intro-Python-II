@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -36,6 +36,17 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+
+player = Player('tj', room['outside'])
+while True:
+    # print(room[i].name)
+    inputs = input('input direction: n, s, e, w: ')
+    
+    print(player.move(inputs))
+    
+
+
+
 
 # Make a new player object that is currently in the 'outside' room.
 
