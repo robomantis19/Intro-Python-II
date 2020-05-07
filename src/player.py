@@ -24,5 +24,6 @@ class Player:
             self.direction = n
             self.current_room = new_room
         else:
-            print('Cannot go that way')
-    
+            return 'Cannot go that way'
+    def print_room(self): 
+        print(f"{self.current_room.name}")
