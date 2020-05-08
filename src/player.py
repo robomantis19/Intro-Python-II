@@ -26,4 +26,14 @@ class Player:
         else:
             return 'Cannot go that way'
     def print_room(self): 
-        print(f"{self.current_room.name}")
+        print(f"room: {self.current_room.name}, room_items: {self.current_room.lists}")
+    def print_room_items(self, inputs):
+        current_items = self.current_room.print_items()
+        print(type(current_items))
+        print('inputs1:',inputs)
+        inputs = inputs.strip(" ")
+        if inputs in current_items: 
+            print('inputs', inputs)
+            index = current_items.index(inputs)
+            print(index)
+            return self.current_room.lists.pop(index)

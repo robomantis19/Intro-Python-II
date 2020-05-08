@@ -9,4 +9,5 @@ class Room:
     def __str__(self): 
         return f"{self.name}, {self.description} \n\nItems in room: {self.lists}\n\n"
 
-    
+    def print_items(self):
+        return self.lists
