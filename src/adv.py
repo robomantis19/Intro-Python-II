@@ -7,7 +7,7 @@ from item import Item
 import sys
 
 # Declare all the rooms
-room_items = ['','','','','','potion', 'mana', 'shield', 'sword', 'bow', 'arrows', 'ring', 'backpack']
+room_items = ['','','','','potion','potion', 'mana', 'shield', 'sword', 'bow', 'arrows', 'ring', 'potion']
 num = random.randrange(0,len(room_items))
 num2 = random.randrange(0,len(room_items))
 num3 = random.randrange(0,len(room_items))
@@ -56,14 +56,14 @@ while True:
     
     if count == 0 or inputs == 'h' or inputs =='help': 	
                 start.play()
-                print(f'\n--------------------\n\nHi player: {player.name} \nType q to quit \n Type i for inventory\n Type room to see items in room \n Type "get item" to pick up item for example ---> get potion | or "drop item" to drop item from inventory| \n\n-----------------\n\n  ')
+                print(f'\n--------------------\n\nHi player: {player.name} \nType q to quit \n Type i for inventory and stats\n Type room to see items in room \n Type "get item" to pick up item for example ---> get potion | or "drop item" to drop item from inventory| \n\n-----------------\n\n  ')
             
     count += 1
     inputs = input('\n\n-------------\n\nmove: n, s, e, w: \n get\drop [item name] \n\n--->')
     if inputs == 'room': 
         player.print_room()
     if inputs == 'i': 
-        print(item_holder)
+                print(f'\n---------items: {item_holder}, \nplayer health: {player.health}\nplayer attack value: {player.attack}')
     if inputs[0:3] == 'get': 
         start.play()
         # print('player.print_items()>>:', player.print_room_items())
@@ -75,6 +75,12 @@ while True:
             print(item_holder.on_take(popped_item))
         if inputs == 'i': 
             print(item_holder)
+
+    
+    if inputs in item_holder.inventory:
+        index = item_holder.inventory.index(inputs)
+        item_to_be_used = item_holder.inventory.pop(index)
+        player.use_item(item_to_be_used)
     elif inputs[0:4] == 'drop': 
         word = inputs[5:].strip(" ")
         if word in item_holder.inventory:
@@ -83,8 +89,8 @@ while True:
     if inputs == "q": 
         sys.exit(1)
     print(player.move(inputs))
-    print(player.take_damage('2'))
-    if count % 3 == 0: 
+    # print(player.take_damage('2'))
+    if count % 6 == 0: 
         print("\n\noh no you've encountered a goblin, time to fight\n\n")
         gobblin = Monster()
         
@@ -100,25 +106,29 @@ while True:
                 print('\n--------------------\n\nAttack directions, for magic: press r key | for sword: press f key | \n\n  ')
             count2 += 1
             inputs = input("\n\n--->  ")
-            
+            if inputs in item_holder.inventory:
+                index = item_holder.inventory.index(inputs)
+                item_to_be_used = item_holder.inventory.pop(index)
+                player.use_item(item_to_be_used)
             if inputs == 'r':
                  
                 sword.play()
-                gobblin.take_damage('10')
+                gobblin.take_damage(player.attack)
                 print(gobblin)
                 print(player.take_damage(gobblin.tackle()))
                 
             elif inputs == 'f':
-                print(player.take_damage(gobblin.fire_attack()))
+                
                 magic.play() 
                 print('\n\nmagic attack value of: ',player.attack,'\n\n')
-                gobblin.take_damage(player.attack)
+                gobblin.take_damage(player.magic)
                 print(gobblin)
-                print(player.take_damage(gobblin.tackle()))
+                print(player.take_damage(gobblin.fire_attack()))
+                
                
                 
             if inputs == 'i': 
-                print(item_holder)
+                print(f'\n---------items: {item_holder}, \nplayer health: {player.health}\nplayer attack value: {player.attack}')
             if gobblin.health <= 0 : 
                 print('\n\n Gobblin fainted \n\n')
                 loop = False

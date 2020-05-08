@@ -9,8 +9,8 @@ class Player:
         self.direction = 'x'
 
         self.health = 100
-        self.attack = random.randrange(10, 50, 10)
-
+        self.attack = 10
+        self.magic = random.randrange(10, 50, 10)
     def take_damage(self, attack_val): 
         self.health -= int(attack_val)
         return f"Player HEALTH: {self.health}, \nPlayer Magic Attack Value {self.attack}"
@@ -29,11 +29,19 @@ class Player:
         print(f"room: {self.current_room.name}, room_items: {self.current_room.lists}")
     def print_room_items(self, inputs):
         current_items = self.current_room.print_items()
-        print(type(current_items))
-        print('inputs1:',inputs)
+        # print(type(current_items))
+        # print('inputs1:',inputs)
         inputs = inputs.strip(" ")
         if inputs in current_items: 
-            print('inputs', inputs)
+            # print('inputs', inputs)
             index = current_items.index(inputs)
-            print(index)
+            # print(index)
             return self.current_room.lists.pop(index)
+    def use_item(self, item_to_use):
+        item_to_use = item_to_use.strip(" ") 
+        if item_to_use == 'potion': 
+            self.health = self.health + 40
+            print('used potion increased health by 40')
+        else: 
+            self.attack = self.attack + 5
+            print('used attack items, attack up by +5')
