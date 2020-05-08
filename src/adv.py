@@ -56,7 +56,7 @@ while True:
     
     if count == 0 or inputs == 'h' or inputs =='help': 	
                 start.play()
-                print(f'\n--------------------\n\nHi player: {player.name} \nType q to quit \n Type i for inventory and stats\n Type room to see items in room \n Type "get item" to pick up item for example ---> get potion | or "drop item" to drop item from inventory| \n\n-----------------\n\n  ')
+                print(f'\n--------------------\n\nHi player: {player.name} \nType q to quit \n Type i for inventory and stats\n Use Item just type item name ie-->potion , Type room to see items in room \n Type "get item" to pick up item for example ---> get potion | or "drop item" to drop item from inventory| \n\n-----------------\n\n  ')
             
     count += 1
     inputs = input('\n\n-------------\n\nmove: n, s, e, w: \n get\drop [item name] \n\n--->')
@@ -103,7 +103,7 @@ while True:
         while loop == True: 
             if count2 == 0 or inputs == 'h' or inputs =='help': 	
                 start.play()
-                print('\n--------------------\n\nAttack directions, for magic: press r key | for sword: press f key | \n\n  ')
+                print('\n--------------------\n\nUse Item just type item name ie-->potion, Attack directions: for magic: press r key | for sword: press f key | \n\n  ')
             count2 += 1
             inputs = input("\n\n--->  ")
             if inputs in item_holder.inventory:
